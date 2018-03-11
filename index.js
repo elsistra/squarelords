@@ -5,7 +5,9 @@ const MongoClient = require('mongodb').MongoClient;
 const routes = [
   require("./routes/index"),
   require("./routes/register"),
-  require("./routes/login")
+  require("./routes/login"),
+  require("./routes/dashboard"),
+  require("./routes/new-game")
 ];
 
 async function main() {

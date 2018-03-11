@@ -12,7 +12,7 @@ module.exports = async (req, res, db) => {
       return true; // Exit Function
     }else if(req.method === 'POST'){
       const parsedBody = await parseBody(req);
-      if(parsedBody.pass1 & parsedBody.pass2 & parsedBody.user){
+      if(parsedBody.pass1 && parsedBody.pass2 && parsedBody.user){
         if(parsedBody.pass1 === parsedBody.pass2){ // If password match
             const newUser = {user: parsedBody.user, pass: parsedBody.pass1};
           await db.collection("users").insertOne(newUser);
