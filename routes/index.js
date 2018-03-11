@@ -3,14 +3,18 @@ const fs = require("fs");
 const util = require("util");
 const readFile = util.promisify(fs.readFile);
 const parseCookie = require("../lib/parseCookie")
+const ObjectId = require("mongodb").ObjectId;
 
 module.exports = async (req, res, db) => {
   const cookie = parseCookie(req);
   // Check the sessions table to get the userId
-  var user;
-  db.collection('users').findOne({session: cookie.session}, function(err, user){
-    //console.log(user);
-  })
+  if(cookie.session){
+    const session = await db.collection("sessions").findOne({_id: new ObjectId(cookie.session)});
+    if(session && session.userId){
+      user = await db.collection("users").findOne({_id: session.userId});
+      console.log(user + " is logged in.");
+    }
+  }
   // Check the users table to get username
   // If username exists...
 
