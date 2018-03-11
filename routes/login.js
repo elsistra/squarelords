@@ -12,12 +12,12 @@ module.exports = async (req, res, db) => {
       return true; // Exit Function
     }else if(req.method === 'POST'){
       const parsedBody = await parseBody(req);
-      console.log(parsedBody.user);
 
       const user = await db.collection('users').findOne({username: parsedBody.user, pass: parsedBody.pass});
       if(user){
         const insertResult = await db.collection("sessions").insertOne({userId: user._id});
         res.setHeader("Set-Cookie", "session=" + insertResult.insertedId);
+        console.log('User found, session set')
       }else{console.log("User not found.");}
 
       res.setHeader("Location", "/");
