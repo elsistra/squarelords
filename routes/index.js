@@ -21,18 +21,25 @@ module.exports = async (req, res, db) => {
       }
     }
 
-    let html = await readFile("views/index.html");
-
     // Modify the index for logged in users
+    let html = await readFile("views/index.html");
     if(user){
       html += `
         <script>
           document.getElementById('a-register').style.display = 'none';
+          document.getElementById('a-login').style.display = 'none';
+        </script>
+      `;
+    }else{
+      html += `
+        <script>
+          document.getElementById('a-logout').style.display = 'none';
+          document.getElementById('a-dashboard').style.display = 'none';
         </script>
       `;
     }
-
     res.end(html);
+
     return true; // Exit Function
   }
 }
