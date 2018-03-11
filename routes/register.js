@@ -14,7 +14,7 @@ module.exports = async (req, res, db) => {
       const parsedBody = await parseBody(req);
       if(parsedBody.pass1 && parsedBody.pass2 && parsedBody.user){
         if(parsedBody.pass1 === parsedBody.pass2){ // If password match
-            const newUser = {username: parsedBody.user, pass: parsedBody.pass1};
+          const newUser = {username: parsedBody.user, pass: parsedBody.pass1};
           await db.collection("users").insertOne(newUser);
         }else{console.log('Passwords do not match');}
       }else{console.log('A field was left empty');}
