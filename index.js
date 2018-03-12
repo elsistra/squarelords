@@ -7,7 +7,8 @@ const routes = [
   require("./routes/register"),
   require("./routes/login"),
   require("./routes/dashboard"),
-  require("./routes/new-game")
+  require("./routes/new-game"),
+  require("./routes/logout")
 ];
 
 async function main() {
