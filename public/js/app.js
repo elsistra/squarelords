@@ -15,3 +15,11 @@ socket.on('games-list', function (gamesArray) {
     listElement.appendChild(newElement);
   });
 });
+
+// Listen for creation of new games.
+socket.on('new-game-created', function (game) {
+  var listElement = document.getElementById('gamesList');
+  const newElement = document.createElement('li');
+  newElement.textContent = game._id;
+  listElement.appendChild(newElement);
+});
