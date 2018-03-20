@@ -4,6 +4,7 @@ const MongoClient = require('mongodb').MongoClient;
 
 // ROUTE HANDLERS BELOW THIS LINE -----------------------------------------------------------------------------
 const routes = [
+  require("./routes/public"),
   require("./routes/index"),
   require("./routes/register"),
   require("./routes/login"),

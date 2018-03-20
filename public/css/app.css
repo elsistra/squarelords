@@ -1,5 +1,6 @@
 body {
   position: relative;
+  background-color: green;
 }
 
 .invalid-feedback {
