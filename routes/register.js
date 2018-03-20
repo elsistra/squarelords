@@ -4,7 +4,7 @@ const readFile = util.promisify(fs.readFile);
 const parseBody = require("../lib/parseBody")
 
 module.exports = async (req, res, db) => {
-  if(req.url == '/register.html'){
+  if(req.url == '/register'){
 
     if(req.method === 'GET'){
       const html = await readFile("views/register.html");

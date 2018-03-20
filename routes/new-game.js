@@ -3,7 +3,7 @@ const parseCookie = require("../lib/parseCookie");
 const checkForSession = require("../lib/checkForSession");
 
 module.exports = async (req, res, db) => {
-  if(req.url == '/new-game.html'){
+  if(req.url == '/new-game'){
     // The user has signaled they wish to create a new game
     // Make sure user is not already in a game
     const sessionUser = await checkForSession(req, db);

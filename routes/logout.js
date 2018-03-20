@@ -3,7 +3,7 @@ const util = require("util");
 const parseCookie = require("../lib/parseCookie");
 
 module.exports = async (req, res, db) => {
-  if(req.url == '/logout.html'){
+  if(req.url == '/logout'){
     if(req.method === 'GET'){
       const cookie = parseCookie(req);
       if(cookie.session !== undefined){
