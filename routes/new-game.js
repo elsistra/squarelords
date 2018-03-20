@@ -2,7 +2,7 @@ const fs = require("fs");
 const parseCookie = require("../lib/parseCookie");
 const checkForSession = require("../lib/checkForSession");
 
-module.exports = async (req, res, db) => {
+module.exports = async (req, res, db, rt) => {
   if(req.url == '/new-game'){
     // The user has signaled they wish to create a new game
     // Make sure user is not already in a game
@@ -18,6 +18,7 @@ module.exports = async (req, res, db) => {
       await db.collection("users").updateOne(filter, update);
       console.log('New Game created');
       // Later index.js can be updated to list games
+      rt.emit("new-game-created", newGame);
     });
     console.log('New Game created for ' + sessionUser.username);
     res.setHeader("Location", "/");

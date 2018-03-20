@@ -27,7 +27,10 @@ async function main() {
   const server = http.createServer(async function (req, res) {
     // Loops through routes until a route returns true
     for (let i = 0; i < routes.length; i++) {
-      if (await routes[i](req, res, db)) { return; }
+      // NOTE: realtimeServer is valid here because this function is a child of the scope the realtimeServer
+      // was defined in and the function does not execute until the server is listening and receiving requests.
+      // This gives the realtimeServer the time it needed to be defined further down.
+      if (await routes[i](req, res, db, realtimeServer)) { return; }
     }
     res.statusCode = 404;
     res.end("Not Found");
