@@ -1,3 +1,5 @@
+console.log('app.js')
+
 const socket = io();
 
 // Ask server for games data
@@ -9,7 +11,7 @@ socket.on('games-list', function (gamesArray) {
   // For each user in Users array...
   gamesArray.forEach((game) => {
     const newElement = document.createElement('li');
-    newElement.textContent = game.gameId;
+    newElement.textContent = game._id;
     listElement.appendChild(newElement);
   });
 });

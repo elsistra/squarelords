@@ -40,7 +40,7 @@ async function main() {
       // A client has connected to the realtime server.
       socket.on('fetch-games-list', async function () {
         // This client is asking for games list data
-        const gameList = await db.games.find().toArray();
+        const gamesList = await db.collection('games').find().toArray();
         socket.emit('games-list', gamesList);
       });
     });
