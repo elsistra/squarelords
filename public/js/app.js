@@ -11,7 +11,7 @@ socket.on('games-list', function (gamesArray) {
   // For each user in Users array...
   gamesArray.forEach((game) => {
     const newElement = document.createElement('li');
-    newElement.textContent = game._id;
+    newElement.innerHTML += game._id + ' <a href="/join-game?id='+game._id+'">Join</a>';
     listElement.appendChild(newElement);
   });
 });
