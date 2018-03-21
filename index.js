@@ -12,7 +12,8 @@ const routes = [
   require("./routes/new-game"),
   require("./routes/logout"),
   require("./routes/game"),
-  require("./routes/leave-game")
+  require("./routes/leave-game"),
+  require("./routes/join-game")
 ];
 
 
