@@ -20,6 +20,10 @@ module.exports = async (req, res, db) => {
       return true; // Exit Function
     }else{
       // User is not logged in
+      console.log('No session found. Redirecting user to login');
+      res.setHeader("Location", "/login");
+      res.statusCode = 302;
+      res.end();
     }
   }
 }

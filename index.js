@@ -1,6 +1,7 @@
 const http = require("http");
 const io = require("socket.io");
 const MongoClient = require('mongodb').MongoClient;
+const checkForSession = require("./lib/checkForSession");
 
 // ROUTE HANDLERS BELOW THIS LINE -----------------------------------------------------------------------------
 const routes = [
@@ -43,9 +44,19 @@ async function main() {
     realtimeServer.on('connect', function (socket) {
       // A client has connected to the realtime server.
       socket.on('fetch-games-list', async function () {
-        // This client is asking for games list data
         const gamesList = await db.collection('games').find().toArray();
         socket.emit('games-list', gamesList);
+      });
+      socket.on('fetch-usersInGame-list', async function () {
+         const sessionUser = await checkForSession(socket.handshake, db);
+        if(sessionUser){
+          // A list of users in the same game
+          const usersInGameList = await db.collection('users').find({gameId: sessionUser.gameId}).toArray();
+          console.log('usersInGame-list sent from server');
+          socket.emit('usersInGame-list', usersInGameList);
+        }else{
+          // No session found
+        }
       });
     });
   server.listen(8080);

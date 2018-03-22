@@ -28,7 +28,11 @@ module.exports = async (req, res, db) => {
         }
       }else{
         // User is not logged in, why are they on the dashboard?
-        console.log('No session found');
+        console.log('No session found. Redirecting user to login');
+        res.setHeader("Location", "/login");
+        res.statusCode = 302;
+        res.end();
+        return true; // Exit Function
       }
     }
   }
