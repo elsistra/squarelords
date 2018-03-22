@@ -54,8 +54,15 @@ async function main() {
           const usersInGameList = await db.collection('users').find({gameId: sessionUser.gameId}).toArray();
           console.log('usersInGame-list sent from server');
           socket.emit('usersInGame-list', usersInGameList);
-        }else{
-          // No session found
+        }
+      });
+      socket.on('fetch-squares-list', async function () {
+         const sessionUser = await checkForSession(socket.handshake, db);
+        if(sessionUser){
+          // A list of squares in the game
+          const squaresList = await db.collection('squares').find({gameId: sessionUser.gameId}).toArray();
+          console.log('squares-list sent from server');
+          socket.emit('squares-list', squaresList);
         }
       });
     });

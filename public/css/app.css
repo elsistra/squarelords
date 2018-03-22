@@ -1,0 +1,16 @@
+#mainGame{
+  width: 500px;
+  height: 500px;
+  border: black solid 1pt;
+}
+.square{
+  width: 20%;
+  height: 20%;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  background: green;
+}
+.square:hover{
+  background-color: red;
+}
