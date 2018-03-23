@@ -1,11 +1,11 @@
 #mainGame{
-  width: 500px;
-  height: 500px;
+  width: 100%;
+  height: 140%;
   border: black solid 1pt;
 }
 .square{
-  width: 20%;
-  height: 20%;
+  width: 4%;
+  height: 4%;
   display: inline-block;
   text-align: center;
   vertical-align: middle;

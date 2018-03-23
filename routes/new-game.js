@@ -14,7 +14,7 @@ module.exports = async (req, res, db, rt) => {
       const insertResult = await db.collection("games").insertOne(newGame);
       // Add new row to squares collection. Game board will be 25 squares
       let i = 1;
-      while(i < 26){
+      while(i < 501){
         const newSquare = {gameId: insertResult.insertedId, position: i, owner: 'None'};
         const insertResult2 = await db.collection("squares").insertOne(newSquare);
         i++;
