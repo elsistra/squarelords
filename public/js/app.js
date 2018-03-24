@@ -52,7 +52,7 @@ if(listElement3){
   socket.on('squares-list', function (squaresArray) {
     squaresArray.forEach((square) => {
       const newElement = document.createElement('div');
-      newElement.className = 'square';
+      newElement.className = 'square '+square.type;
       newElement.id = 'square'+square.position;
       listElement3.appendChild(newElement);
     });
