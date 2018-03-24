@@ -39,7 +39,7 @@ module.exports = async (req, res, db, rt) => {
       while(village !== 'assigned'){
         // Pick a random location on the map
         const randomSquare = Math.floor(Math.random() * 1600) + 1
-        if(assignSquare(randomSquare, 'village', sessionUser._id, db)){
+        if(await assignSquare(randomSquare, 'village', sessionUser._id, db)){
           // Success it worked!
           village = 'assigned';
         }
