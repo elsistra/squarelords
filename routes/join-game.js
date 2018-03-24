@@ -5,6 +5,7 @@ const util = require("util");
 const parseCookie = require("../lib/parseCookie");
 const URL = require('url').URL;
 const ObjectId = require("mongodb").ObjectId;
+const assignSquare = require("../lib/assignSquare");
 
 module.exports = async (req, res, db, rt) => {
   const urlObj = new URL(req.url, 'http://localhost');
@@ -17,7 +18,17 @@ module.exports = async (req, res, db, rt) => {
       const update = {$set: {gameId: new ObjectId(gameId)}};
       await db.collection("users").updateOne(filter, update);
       console.log('User has joined the game');
-      rt.emit("new-game-joined", sessionUser);
+      // Assign the user a village
+      let village = '';
+      while(village !== 'assigned'){
+        // Pick a random location on the map
+        const randomSquare = Math.floor(Math.random() * 1600) + 1
+        if(await assignSquare(randomSquare, 'village', sessionUser._id, db)){
+          // Success it worked!
+          village = 'assigned';
+          rt.emit("new-game-joined", {sessionUser, randomSquare});
+        }
+      }
       // Send user to game
       res.setHeader("Location", "/game");
       res.statusCode = 302;

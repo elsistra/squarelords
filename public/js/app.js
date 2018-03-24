@@ -37,10 +37,15 @@ if(listElement2){
     });
   });
   // Listen for user joining the a game
-  socket.on('new-game-joined', function (user) {
+  socket.on('new-game-joined', function (data) {
+    const sessionUser = data.sessionUser;
+    const randomSquare = data.randomSquare;
     const newElement = document.createElement('li');
-    newElement.innerHTML += user._id + ' <a href="/">'+user.username+'</a>';
+    newElement.innerHTML += sessionUser._id + ' <a href="/">'+sessionUser.username+'</a>';
     listElement2.appendChild(newElement);
+    // Update square to village when new user joins
+    var newVillage = document.getElementById('square'+randomSquare);
+    newVillage.className = 'square village';
   });
 }
 
